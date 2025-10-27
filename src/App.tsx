@@ -27,8 +27,8 @@ export default function IntelitechLanding(): JSX.Element {
   // Trabajos (portfolio)
   const [works] = useState<Work[]>([
     { id: 1, title: '', img: '/images/Image1.jpg', url: '' },
-    { id: 2, title: '', img: '/images/Image2.jpg', url: '' },
-    { id: 3, title: '', img: '/images/Image3.jpg', url: '' }
+    { id: 2, title: '', img: '/images/Image4.jpg', url: '' },
+    { id: 3, title: '', img: '/images/Image5.jpg', url: '' }
   ]);
 
   const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' });
