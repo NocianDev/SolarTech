@@ -2,26 +2,22 @@ import React, { useState, type JSX } from 'react';
 
 type Service = { id: number; title: string };
 type Work = { id: number; title: string; img: string; url: string };
-type FormState = { name: string; email: string; message: string };
+type FormState = { name: string; message: string };
 
 export default function IntelitechLanding(): JSX.Element {
   // --- Rutas editables (pon tus archivos dentro de public/) ---
-  const LOGO = '/images/Logo.png';
+  const LOGO = '/images/Logo2.png';
   const BACKGROUND = '/images/Background.png';
 
   // Servicios
   const [services] = useState<Service[]>([
-    { id: 1, title: 'Paneles Solares' },
-    { id: 2, title: 'Puntos de Venta' },
-    { id: 3, title: 'Cercos Electricos' },
-    { id: 4, title: 'Camaras de seguridad' },
-    { id: 5, title: 'Control de acceso' },
-    { id: 6, title: 'Alarmas' },
-    { id: 7, title: 'Aires Acondicionados' },
-    { id: 8, title: 'Redes' },
-    { id: 9, title: 'Radiocomunicaciones' },
-    { id: 10, title: 'Estudios Site Survey' },
-    { id: 11, title: 'Equipos de Inspeccion Rayos X' }
+    { id: 1, title: 'Instalacion de Paneles Solares' },
+    { id: 2, title: 'Instalacion de Calefaccion Solar Para Albercas' },
+    { id: 3, title: 'Mantenimiento preventivo y correctivo de sistemas solares' },
+    { id: 4, title: 'Diagnóstico y reparación de sistemas fotovoltaicos' },
+    { id: 5, title: 'Monitoreo y optimización de rendimiento solar' },
+    { id: 6, title: 'Sistemas solares aislados' },
+    { id: 7, title: 'Sistemas solares conectados a red' },
   ]);
 
   // Trabajos (portfolio)
@@ -31,7 +27,7 @@ export default function IntelitechLanding(): JSX.Element {
     { id: 3, title: '', img: '/images/Image5.jpg', url: '' }
   ]);
 
-  const [form, setForm] = useState<FormState>({ name: '', email: '', message: '' });
+  const [form, setForm] = useState<FormState>({ name: '', message: '' });
 
   // manejo del src del logo (para fallback si falla la carga)
   const [logoSrc, setLogoSrc] = useState<string>(LOGO);
@@ -46,12 +42,10 @@ export default function IntelitechLanding(): JSX.Element {
   const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const subject = encodeURIComponent(`Contacto — INTELITECH: ${form.name}`);
-    const body = encodeURIComponent(`Nombre: ${form.name}
-Email: ${form.email}
-
-Mensaje:
-${form.message}`);
-    const RECEIVER = 'tu-correo@ejemplo.com';
+    const body = encodeURIComponent(`Nombre: ${form.name}\n\nMensaje:\n${form.message}`);
+    // Cambia este correo por el que quieras recibir los mensajes
+    const RECEIVER = 'ejemplo@gmail.com';
+    // Abre el cliente de correo del usuario con los campos ya rellenados
     window.location.href = `mailto:${RECEIVER}?subject=${subject}&body=${body}`;
   };
 
@@ -102,7 +96,7 @@ ${form.message}`);
                     }}
                   />
                   <div>
-                    <div className="text-sm text-sky-300 font-semibold">INTELI<span className="text-yellow-300">TECH</span></div>
+                    <div className="text-sm text-sky-300 font-semibold">SOLAR<span className="text-yellow-300">TECH</span></div>
                     <div className="text-xs text-gray-300">Soluciones Fotovoltaicas</div>
                   </div>
                 </div>
@@ -134,17 +128,14 @@ ${form.message}`);
 
               {/* Lado derecho: logo grande (se mantiene simple si no quieres contenido aquí) */}
               <div className="lg:col-span-5 hidden lg:flex justify-center items-center">
-                <div
-                  
-                >
-                  {/* Caja interior más pequeña para que el logo no ocupe todo el recuadro */}
+                <div>
                   <div className="absolute left-1/2 top-1/2 w-64 h-64 -translate-x-1/2 -translate-y-1/2 rounded-2xl overflow-hidden flex items-center justify-center">
                     <img
-                                          />
+                      // Puedes colocar aquí un src si quieres mostrar el logo grande
+                    />
 
                     {/* Líneas decorativas tipo circuito */}
                     <svg className="absolute left-0 bottom-0 w-full h-full opacity-30 pointer-events-none" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden={true}>
-                      
                     </svg>
                   </div>
                 </div>
@@ -161,7 +152,7 @@ ${form.message}`);
           {/* Servicios */}
           <section id="services" className="mb-16">
             <h2 className="text-3xl font-bold mb-4">Nuestros servicios</h2>
-            <p className="text-gray-300 mb-6">Instalacion de:</p>
+            <p className="text-gray-300 mb-6">Manejamos variedad de proyectos como:</p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {services.map((s) => (
@@ -223,18 +214,7 @@ ${form.message}`);
                   />
                 </div>
 
-                <div>
-                  <label className="text-sm text-white">Email</label>
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={handleChange}
-                    className="w-full mt-2 p-3 rounded-md bg-transparent border border-white/10 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition"
-                    placeholder="tu@correo.com"
-                  />
-                </div>
+                {/* Campo de email eliminado según solicitud: sólo nombre y mensaje */}
 
                 <div>
                   <label className="text-sm text-white">Mensaje</label>
@@ -251,7 +231,7 @@ ${form.message}`);
 
                 <div className="flex items-center gap-4">
                   <button type="submit" className="px-5 py-3 rounded-full bg-yellow-400 text-black font-semibold">Enviar mensaje</button>
-                  <button type="button" onClick={() => setForm({ name: '', email: '', message: '' })} className="px-4 py-2 rounded-lg border border-white/20 text-white/90">Limpiar</button>
+                  <button type="button" onClick={() => setForm({ name: '', message: '' })} className="px-4 py-2 rounded-lg border border-white/20 text-white/90">Limpiar</button>
                 </div>
               </form>
 
